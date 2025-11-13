@@ -2,6 +2,8 @@ package dir
 
 import (
 	"os"
+
+	log "github.com/sirupsen/logrus"
 )
 
 // Create : create a directory
@@ -50,7 +52,12 @@ func CreateFileIfNotExist(path string) error {
 		if err != nil {
 			return err
 		}
-		defer file.Close()
+		defer func(file *os.File) {
+			err := file.Close()
+			if err != nil {
+				log.Error(err)
+			}
+		}(file)
 	} else if err != nil {
 		return err
 	}
