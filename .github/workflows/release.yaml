@@ -1,11 +1,10 @@
 name: odin-release
 on:
-  pull_request:
-    types: [closed]
+  release:
+    types: [ released ]
 jobs:
   release:
     name: odin-release
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -13,22 +12,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - id: changed_files
-        uses: jitterbit/get-changed-files@b17fbb00bdc0c0f63fcf166580804b4d2cdc2a42 # v1
-
       - name: Check commit details
         id: commit
         run: |
-          # shellcheck disable=SC2086
-          echo "version=$(go run main.go version)" >> $GITHUB_OUTPUT
-          # shellcheck disable=SC2086
-          echo "changelog=$(git log --pretty='- %s')" >> $GITHUB_OUTPUT
+          echo "version=$(go run main.go version)" >> "$GITHUB_OUTPUT"
+          echo "changelog=$(git log --pretty='- %s')" >> "$GITHUB_OUTPUT"
 
       - name: Set Go version based on branch
         id: go-version
         run: |
-          # shellcheck disable=SC2086
-          echo "go_version=1.22.0" >> $GITHUB_OUTPUT
+          echo "go_version=1.22.0" >> "$GITHUB_OUTPUT"
 
       - name: Create Tag
         uses: negz/create-tag@39bae1e0932567a58c20dea5a1a0d18358503320 # v1
@@ -49,12 +42,9 @@ jobs:
         id: sha256
         run: |
           # shellcheck disable=SC2129
-          # shellcheck disable=SC2086
-          echo "darwin_amd64=$(shasum -a 256 bin/odin_darwin_amd64.tar.gz | cut -d' ' -f1)" >> $GITHUB_OUTPUT
-          # shellcheck disable=SC2086
-          echo "darwin_arm64=$(shasum -a 256 bin/odin_darwin_arm64.tar.gz | cut -d' ' -f1)" >> $GITHUB_OUTPUT
-          # shellcheck disable=SC2086
-          echo "linux_amd64=$(shasum -a 256 bin/odin_linux_amd64.tar.gz | cut -d' ' -f1)" >> $GITHUB_OUTPUT
+          echo "darwin_amd64=$(shasum -a 256 bin/odin_darwin_amd64.tar.gz | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          echo "darwin_arm64=$(shasum -a 256 bin/odin_darwin_arm64.tar.gz | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          echo "linux_amd64=$(shasum -a 256 bin/odin_linux_amd64.tar.gz | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
 
       - name: Create Release
         uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
