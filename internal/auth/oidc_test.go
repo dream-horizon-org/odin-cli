@@ -9,6 +9,7 @@ import (
 	"testing"
 	"unicode"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/protobuf/types/known/structpb"
@@ -234,6 +235,11 @@ func getFreePort() (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	defer listener.Close()
+	defer func(listener net.Listener) {
+		err := listener.Close()
+		if err != nil {
+			log.Error(err)
+		}
+	}(listener)
 	return listener.Addr().(*net.TCPAddr).Port, nil
 }

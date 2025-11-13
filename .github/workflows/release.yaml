@@ -23,13 +23,6 @@ jobs:
         run: |
           echo "go_version=1.22.0" >> "$GITHUB_OUTPUT"
 
-      - name: Create Tag
-        uses: negz/create-tag@39bae1e0932567a58c20dea5a1a0d18358503320 # v1
-        with:
-          version: ${{ steps.commit.outputs.version }}
-          message: ${{ steps.commit.outputs.version }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 # v6.0.0
         with:
           go-version: ${{ steps.go-version.outputs.go_version }}

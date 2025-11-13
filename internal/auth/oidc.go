@@ -87,7 +87,12 @@ func (p *OIDCProvider) Authenticate(providerData *structpb.Struct) (*structpb.St
 }
 
 func waitForCallback(ln net.Listener, expectedState string) (string, error) {
-	defer ln.Close()
+	defer func(ln net.Listener) {
+		err := ln.Close()
+		if err != nil {
+			log.Errorf("Failed to close listener: %v", err)
+		}
+	}(ln)
 
 	var code string
 
@@ -169,7 +174,11 @@ func sendSuccessPage(w http.ResponseWriter) {
 func sendErrorPage(w http.ResponseWriter, title, message string) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusBadRequest)
-	fmt.Fprintf(w, errorPageTemplate, title, title, message)
+	_, err := fmt.Fprintf(w, errorPageTemplate, title, title, message)
+	if err != nil {
+		log.Error("Failed to send error page: ", err)
+		return
+	}
 }
 
 func parseProviderData(data *structpb.Struct) (*OIDCProviderConfig, error) {
