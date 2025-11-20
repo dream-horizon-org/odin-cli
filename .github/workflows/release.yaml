@@ -42,6 +42,7 @@ jobs:
         uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
         with:
           artifacts: "bin/*.tar.gz"
+          allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup git config
