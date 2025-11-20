@@ -48,6 +48,10 @@ func (l *Logs) GetLogs(ctx *context.Context, request *logs.GetLogsRequest) ([]in
 			}
 			if st, ok := status.FromError(err); ok && st.Code() == codes.NotFound {
 				time.Sleep(5 * time.Second)
+				stream, err = client.GetLogs(*requestCtx, request)
+				if err != nil {
+					return request.GetSearchAfterParams(), err
+				}
 				continue
 			}
 			return searchAfterParams, err
