@@ -38,14 +38,36 @@ jobs:
       - name: Create Release Asset
         run: make compressed-builds
 
+      - name: Generate Asset SHA256
+        id: sha256
+        run: |
+          # shellcheck disable=SC2129
+          echo "darwin_amd64=$(shasum -a 256 bin/odin_darwin_amd64.tar.gz | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          echo "darwin_arm64=$(shasum -a 256 bin/odin_darwin_arm64.tar.gz | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          echo "linux_amd64=$(shasum -a 256 bin/odin_linux_amd64.tar.gz | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+
+
       - name: Create Release
-        uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
+        uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836 #v2.3.3
         with:
-          artifacts: "bin/*.tar.gz"
-          allowUpdates: true
-          omitNameDuringUpdate: true
-          omitBodyDuringUpdate: true
+          overwrite_files: false
+          files: "bin/*.tar.gz"
+          append_body: true
           token: ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            ## Assets
+
+            ### Darwin AMD64
+            - Asset Url: https://github.com/ds-horizon/odin-cli/releases/download/v${{ steps.get_version.outputs.VERSION }}/odin_darwin_amd64.tar.gz
+            - SHA Checksum: `${{ steps.sha256.outputs.darwin_amd64 }}`
+
+            ### Darwin ARM64
+            - Asset Url: https://github.com/ds-horizon/odin-cli/releases/download/v${{ steps.get_version.outputs.VERSION }}/odin_darwin_arm64.tar.gz
+            - SHA Checksum: `${{ steps.sha256.outputs.darwin_arm64 }}`
+
+            ### Linux AMD64
+            - Asset Url: https://github.com/ds-horizon/odin-cli/releases/download/v${{ steps.get_version.outputs.VERSION }}/odin_linux_amd64.tar.gz
+            - SHA Checksum: `${{ steps.sha256.outputs.linux_amd64 }}`
 
       - name: Setup git config
         run: |
