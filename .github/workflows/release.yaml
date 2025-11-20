@@ -43,6 +43,8 @@ jobs:
         with:
           artifacts: "bin/*.tar.gz"
           allowUpdates: true
+          omitNameDuringUpdate: true
+          omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup git config
