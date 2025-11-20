@@ -19,6 +19,7 @@ var restrictedLogLevels = []string{"DEBUG", "WARN"}
 // Logs performs operation on logs like get logs
 type Logs struct{}
 
+
 // GetLogs retrieves and displays logs for a service
 func (l *Logs) GetLogs(ctx *context.Context, request *logs.GetLogsRequest) ([]int64, error) {
 	conn, requestCtx, err := grpcClient(ctx)
@@ -34,6 +35,7 @@ func (l *Logs) GetLogs(ctx *context.Context, request *logs.GetLogsRequest) ([]in
 
 	client := logs.NewLogsServiceClient(conn)
 	stream, err := client.GetLogs(*requestCtx, request)
+
 	if err != nil {
 		return request.GetSearchAfterParams(), err
 	}
@@ -48,6 +50,10 @@ func (l *Logs) GetLogs(ctx *context.Context, request *logs.GetLogsRequest) ([]in
 			}
 			if st, ok := status.FromError(err); ok && st.Code() == codes.NotFound {
 				time.Sleep(5 * time.Second)
+				stream, err = client.GetLogs(*requestCtx, request)
+				if err != nil {
+					return request.GetSearchAfterParams(), err
+				}
 				continue
 			}
 			return searchAfterParams, err
