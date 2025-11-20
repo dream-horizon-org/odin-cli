@@ -49,7 +49,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Bump version
+      - name: Commit version
         env:
           RELEASE_VERSION: ${{ steps.get_version.outputs.VERSION }}
         run: .ci/scripts/commit-version.sh
