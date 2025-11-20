@@ -9,58 +9,47 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Validate release branch
+        run: |
+          if [[ "${{ github.event.release.target_commitish }}" != "${{ github.event.repository.default_branch }}" ]]; then
+            echo "::error:: Releases must be created from the default branch (${{ github.event.repository.default_branch }})"
+            echo "This release was created from: ${{ github.event.release.target_commitish }}"
+            exit 1
+          fi
+
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Check commit details
-        id: commit
+      - name: Get version from tag
+        id: get_version
         run: |
-          echo "version=$(go run main.go version)" >> "$GITHUB_OUTPUT"
-          echo "changelog=$(git log --pretty='- %s')" >> "$GITHUB_OUTPUT"
+          releaseVersion="${GITHUB_REF/refs\/tags\//}"
+          releaseVersion="${releaseVersion//v/}"
+          echo "VERSION=$releaseVersion" >> "$GITHUB_OUTPUT"
 
-      - name: Set Go version based on branch
-        id: go-version
+      - name: Update version
         run: |
-          echo "go_version=1.22.0" >> "$GITHUB_OUTPUT"
+          sed -i 's/Version: "[^"]*"/Version: "${{ steps.get_version.outputs.VERSION }}"/' app/app.go
 
       - uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 # v6.0.0
         with:
-          go-version: ${{ steps.go-version.outputs.go_version }}
+          go-version: 1.22.0
 
       - name: Create Release Asset
-        run: |
-          make compressed-builds
-
-      - name: Generate Asset SHA256
-        id: sha256
-        run: |
-          # shellcheck disable=SC2129
-          echo "darwin_amd64=$(shasum -a 256 bin/odin_darwin_amd64.tar.gz | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
-          echo "darwin_arm64=$(shasum -a 256 bin/odin_darwin_arm64.tar.gz | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
-          echo "linux_amd64=$(shasum -a 256 bin/odin_linux_amd64.tar.gz | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+        run: make compressed-builds
 
       - name: Create Release
         uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
         with:
-          name: Release ${{ steps.commit.outputs.version }}
-          tag: ${{ steps.commit.outputs.version }}
           artifacts: "bin/*.tar.gz"
-          body: |
-            ### Changelog:
-            ${{ steps.commit.outputs.changelog }}
-            ---
-            ### Assets
-
-            #### Darwin AMD64
-            - Asset Url: https://github.com/ds-horizon/odin-cli/releases/download/${{ steps.commit.outputs.version }}/odin_darwin_amd64.tar.gz
-            - SHA Checksum: `${{ steps.sha256.outputs.darwin_amd64 }}`
-
-            #### Darwin ARM64
-            - Asset Url: https://github.com/ds-horizon/odin-cli/releases/download/${{ steps.commit.outputs.version }}/odin_darwin_arm64.tar.gz
-            - SHA Checksum: `${{ steps.sha256.outputs.darwin_arm64 }}`
-
-            #### Linux AMD64
-            - Asset Url: https://github.com/ds-horizon/odin-cli/releases/download/${{ steps.commit.outputs.version }}/odin_linux_amd64.tar.gz
-            - SHA Checksum: `${{ steps.sha256.outputs.linux_amd64 }}`
-
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup git config
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit version
+        env:
+          RELEASE_VERSION: ${{ steps.get_version.outputs.VERSION }}
+        run: .ci/scripts/commit-version.sh
