@@ -3,6 +3,7 @@ package operate
 import (
 	"context"
 	"encoding/json"
+	"os"
 
 	"github.com/dream11/odin/internal/service"
 	"github.com/dream11/odin/pkg/config"
@@ -11,7 +12,6 @@ import (
 	serviceProto "github.com/dream11/odin/proto/gen/go/dream11/od/service/v1"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"google.golang.org/protobuf/types/known/structpb"
 )
 
 var serviceClient = service.Service{}
@@ -56,7 +56,7 @@ func executeOperateService(cmd *cobra.Command) {
 	contextWithTrace = context.WithValue(contextWithTrace, constant.VerboseEnabledKey, verboseEnabled)
 
 	//validate the variables
-	var optionsData map[string]interface{}
+	var configJSON string
 
 	isOptionsPresent := options != "{}"
 	isFilePresent := len(file) > 0
@@ -66,21 +66,19 @@ func executeOperateService(cmd *cobra.Command) {
 	}
 
 	if isFilePresent {
-		parsedConfig, err := util.ParseFile(file)
+		fileContent, err := os.ReadFile(file)
 		if err != nil {
-			log.Fatal("Error while parsing file " + file + " : " + err.Error())
+			log.Fatal("Error reading file " + file + " : " + err.Error())
 		}
-		optionsData = parsedConfig.(map[string]interface{})
+		configJSON = string(fileContent)
 	} else {
-		err := json.Unmarshal([]byte(options), &optionsData)
-		if err != nil {
-			log.Fatal("Unable to parse JSON data " + err.Error())
-		}
+		configJSON = options
 	}
 
-	config, err := structpb.NewStruct(optionsData)
-	if err != nil {
-		log.Fatal("error converting JSON to structpb.Struct: ", err)
+	// Validate that it's valid JSON
+	var jsonTest interface{}
+	if err := json.Unmarshal([]byte(configJSON), &jsonTest); err != nil {
+		log.Fatal("Invalid JSON in config: " + err.Error())
 	}
 
 	//call operate service client
@@ -89,7 +87,7 @@ func executeOperateService(cmd *cobra.Command) {
 		ServiceName:          name,
 		IsComponentOperation: false,
 		Operation:            operation,
-		Config:               config,
+		ConfigJson:           &configJSON,
 	})
 
 	if err != nil {

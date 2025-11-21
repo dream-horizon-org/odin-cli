@@ -16,8 +16,8 @@ import (
 	serviceProto "github.com/dream11/odin/proto/gen/go/dream11/od/service/v1"
 	"github.com/fatih/color"
 	log "github.com/sirupsen/logrus"
+	"os"
 	"github.com/spf13/cobra"
-	"google.golang.org/protobuf/types/known/structpb"
 )
 
 var name string
@@ -94,7 +94,7 @@ func execute(cmd *cobra.Command) {
 	contextWithTrace = context.WithValue(contextWithTrace, constant.VerboseEnabledKey, verboseEnabled)
 
 	//validate the variables
-	var optionsData map[string]interface{}
+	var configJSON string
 
 	isOptionsPresent := options != "{}"
 	isFilePresent := len(file) > 0
@@ -104,31 +104,34 @@ func execute(cmd *cobra.Command) {
 	}
 
 	if isFilePresent {
-		parsedConfig, err := util.ParseFile(file)
+		fileContent, err := os.ReadFile(file)
 		if err != nil {
-			log.Fatal("Error while parsing file " + file + " : " + err.Error())
+			log.Fatal("Error reading file " + file + " : " + err.Error())
 		}
-		optionsData = parsedConfig.(map[string]interface{})
+		configJSON = string(fileContent)
 	} else {
-		err := json.Unmarshal([]byte(options), &optionsData)
-		if err != nil {
-			log.Fatal("Unable to parse JSON data " + err.Error())
-		}
+		configJSON = options
 	}
 
-	config, err := structpb.NewStruct(optionsData)
-	if err != nil {
-		log.Fatal("error converting JSON to structpb.Struct: ", err)
+	// Validate that it's valid JSON
+	var jsonTest interface{}
+	if err := json.Unmarshal([]byte(configJSON), &jsonTest); err != nil {
+		log.Fatal("Invalid JSON in config: " + err.Error())
 	}
 	//call operate component client
 	if operation == "redeploy" {
-		diffValues, err := componentClient.CompareOperationChanges(&contextWithTrace, &serviceProto.OperateComponentDiffRequest{
+		diffReq := &serviceProto.OperateComponentDiffRequest{
 			EnvName:       env,
 			ServiceName:   serviceName,
 			ComponentName: name,
 			OperationName: operation,
-			Config:        config,
-		})
+			ConfigJson:    &configJSON,
+		}
+		fmt.Println("\n=== CompareOperationChanges Request Payload (protobuf format) ===")
+		fmt.Println(diffReq.String())
+		fmt.Println("==================================================================\n")
+
+		diffValues, err := componentClient.CompareOperationChanges(&contextWithTrace, diffReq)
 		if err != nil {
 			log.Fatal("Failed to compare operation changes\n", err)
 		}
@@ -194,14 +197,19 @@ func execute(cmd *cobra.Command) {
 		}
 
 	}
-	err = componentClient.OperateComponent(&contextWithTrace, &serviceProto.OperateServiceRequest{
+	operateReq := &serviceProto.OperateServiceRequest{
 		EnvName:              env,
 		ServiceName:          serviceName,
 		ComponentName:        name,
 		IsComponentOperation: true,
 		Operation:            operation,
-		Config:               config,
-	})
+		ConfigJson:           &configJSON,
+	}
+	fmt.Println("\n=== OperateComponent Request Payload (protobuf format) ===")
+	fmt.Println(operateReq.String())
+	fmt.Println("===========================================================\n")
+
+	err = componentClient.OperateComponent(&contextWithTrace, operateReq)
 
 	if err != nil {
 		util.LogGrpcError(err, "Failed to operate on component: ")

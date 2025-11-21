@@ -2,7 +2,7 @@ module github.com/dream11/odin
 
 go 1.22.0
 
-toolchain go1.22.3
+toolchain go1.22.9
 
 require (
 	github.com/avast/retry-go v3.0.0+incompatible
@@ -11,7 +11,6 @@ require (
 	github.com/mitchellh/cli v1.1.5
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/stretchr/testify v1.11.1
-	golang.org/x/exp v0.0.0-20241009180824-f66d83c29e7c
 	golang.org/x/exp v0.0.0-20241009180824-f66d83c29e7c
 	gopkg.in/yaml.v2 v2.3.0
 	gopkg.in/yaml.v3 v3.0.1
