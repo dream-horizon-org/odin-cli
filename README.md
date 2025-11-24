@@ -1,7 +1,7 @@
 # Odin CLI
 
-![Go Version](https://img.shields.io/badge/go-1.22+-00ADD8?style=flat-square)
-![License: LGPL v3](https://img.shields.io/badge/license-LGPLv3-blue.svg)
+[![Go Version](https://img.shields.io/badge/go-1.22+-00ADD8?style=flat-square)](https://go.dev/dl/)
+[![License: LGPL v3](https://img.shields.io/badge/license-LGPLv3-blue.svg)](./LICENSE)
 
 ## Table of Contents
 - [Overview](#overview)
@@ -14,8 +14,9 @@
 - [Configuration](#configuration)
 - [Usage](#usage)
   - [Global Flags](#global-flags)
-  - [Command Reference](#command-reference)
+  - [Command Catalog](#command-catalog)
 - [Output Formats](#output-formats)
+- [CI Status & Releases](#ci-status--releases)
 - [Development](#development)
 - [Contributing](#contributing)
 - [License](#license)
@@ -95,9 +96,11 @@ All commands inherit the following flags from the root `odin` command:
 | `--output`, `-o`  | `text`    | Controls command output (`text` or `json`). |
 | `--verbose`, `-v` | `false`   | Enables verbose logging and richer diagnostic output. |
 
-### Command Reference
+### Command Catalog
 
-#### `odin configure`
+<details open>
+<summary><code>odin configure</code></summary>
+
 Configure Odin locally and authenticate with the backend.
 
 | Flag | Description |
@@ -109,17 +112,29 @@ Configure Odin locally and authenticate with the backend.
 
 Environment variables with the `ODIN_` prefix take precedence over config for these values. On success, an access token is stored alongside the active profile.
 
-#### `odin create env <name>`
+</details>
+
+<details>
+<summary><code>odin create env &lt;name&gt;</code></summary>
+
 Create a new environment tied to one or more cloud provider accounts.
 
 | Flag | Description |
 |------|-------------|
 | `--accounts` | Required. Comma-separated list (`aws/dev,aws/shared`) designating provider accounts. |
 
-#### `odin delete env <name>`
+</details>
+
+<details>
+<summary><code>odin delete env &lt;name&gt;</code></summary>
+
 Delete an existing environment.
 
-#### `odin deploy service`
+</details>
+
+<details>
+<summary><code>odin deploy service</code></summary>
+
 Deploy a service into an environment using a service definition and provisioning config.
 
 | Flag | Description |
@@ -130,7 +145,11 @@ Deploy a service into an environment using a service definition and provisioning
 
 Both `--file` and `--provisioning` must be supplied together.
 
-#### `odin describe env <name>`
+</details>
+
+<details>
+<summary><code>odin describe env &lt;name&gt;</code></summary>
+
 Fetch detailed information about an environment, optionally filtered by service/component.
 
 | Flag | Description |
@@ -140,7 +159,11 @@ Fetch detailed information about an environment, optionally filtered by service/
 
 Use `--output json` to retrieve machine-readable environment descriptors.
 
-#### `odin list env`
+</details>
+
+<details>
+<summary><code>odin list env</code></summary>
+
 List environments visible to the authenticated user or organization.
 
 | Flag | Description |
@@ -148,7 +171,11 @@ List environments visible to the authenticated user or organization.
 | `--account` | Filter environments associated with a specific provider account. |
 | `--all`, `-A` | Include environments outside the requesting user's ownership (requires access). |
 
-#### `odin operate service`
+</details>
+
+<details>
+<summary><code>odin operate service</code></summary>
+
 Run lifecycle operations (e.g., rollout, pause) against a service.
 
 | Flag | Description |
@@ -161,7 +188,11 @@ Run lifecycle operations (e.g., rollout, pause) against a service.
 
 When the operation is `redeploy`, Odin shows a diff of pending changes and asks for interactive confirmation.
 
-#### `odin operate component`
+</details>
+
+<details>
+<summary><code>odin operate component</code></summary>
+
 Execute component-level operations within a service.
 
 | Flag | Description |
@@ -172,13 +203,25 @@ Execute component-level operations within a service.
 | `--operation` | Required. Operation identifier. |
 | `--options` / `--file` | Same semantics as `odin operate service`; provide either inline JSON or a file. |
 
-#### `odin set env <name>`
+</details>
+
+<details>
+<summary><code>odin set env &lt;name&gt;</code></summary>
+
 Persist a default environment for the active profile (`~/.odin/config`). Subsequent commands without `--env` reference this value.
 
-#### `odin set profile <profile>`
+</details>
+
+<details>
+<summary><code>odin set profile &lt;profile&gt;</code></summary>
+
 Switch the active profile. Profiles must already exist in the config file (created via `odin configure`).
 
-#### `odin status env <env-name>`
+</details>
+
+<details>
+<summary><code>odin status env &lt;env-name&gt;</code></summary>
+
 Inspect the deployment status of an environment and optionally narrow it to a service.
 
 | Flag | Description |
@@ -187,7 +230,11 @@ Inspect the deployment status of an environment and optionally narrow it to a se
 
 Outputs a human-readable table by default and can emit JSON with `--output json`.
 
-#### `odin undeploy service <name>`
+</details>
+
+<details>
+<summary><code>odin undeploy service &lt;name&gt;</code></summary>
+
 Remove a service from an environment.
 
 | Flag | Description |
@@ -196,13 +243,25 @@ Remove a service from an environment.
 
 Undeploying from `prod` requires typing `PROD` to confirm, adding a safety net for critical environments.
 
-#### `odin version`
+</details>
+
+<details>
+<summary><code>odin version</code></summary>
+
 Print the CLI version (`app.App.Version`).
+
+</details>
 
 ## Output Formats
 Most commands support `--output text` (default) and `--output json`. JSON output is designed for scripting and automation; text output favors human readability with aligned tables.
 
 Verbose logging (`--verbose`) augments command execution with trace IDs and diagnostic messages. Advanced users can also tune `ODIN_LOG_LEVEL`.
+
+## CI Status & Releases
+- **Continuous Integration:** Track the latest lint and build pipeline results from GitHub Actions.  
+  [![CI Status](https://github.com/dream11/odin/actions/workflows/go-lint.yaml/badge.svg)](https://github.com/dream11/odin/actions/workflows/go-lint.yaml)
+- **Latest Release:** Download the most recent Odin CLI binaries and changelog.  
+  [![GitHub Release](https://img.shields.io/github/v/release/dream11/odin?display_name=tag&sort=semver&style=flat-square)](https://github.com/dream11/odin/releases)
 
 ## Development
 - Run `go test ./...` to execute unit tests.
