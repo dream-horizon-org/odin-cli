@@ -234,7 +234,7 @@ const file_dream11_od_logs_v1_logs_proto_rawDesc = "" +
 	"\n" +
 	"_timestamp2e\n" +
 	"\vLogsService\x12V\n" +
-	"\aGetLogs\x12\".dream11.od.logs.v1.GetLogsRequest\x1a#.dream11.od.logs.v1.GetLogsResponse\"\x000\x01B9Z7github.com/dream11/odin/proto/gen/go/dream11/od/logs/v1b\x06proto3"
+	"\aGetLogs\x12\".dream11.od.logs.v1.GetLogsRequest\x1a#.dream11.od.logs.v1.GetLogsResponse\"\x000\x01BCZAgithub.com/dream-horizon-org/odin/proto/gen/go/dream11/od/logs/v1b\x06proto3"
 
 var (
 	file_dream11_od_logs_v1_logs_proto_rawDescOnce sync.Once

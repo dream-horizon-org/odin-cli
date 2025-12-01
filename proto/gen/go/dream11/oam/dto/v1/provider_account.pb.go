@@ -263,7 +263,7 @@ const file_dream11_oam_dto_v1_provider_account_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
 	"\bcategory\x18\x02 \x01(\tR\bcategory\x12+\n" +
 	"\x04data\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x04data\x12\x0e\n" +
-	"\x02id\x18\x04 \x01(\x03R\x02idB9Z7github.com/dream11/odin/proto/gen/go/dream11/oam/dto/v1b\x06proto3"
+	"\x02id\x18\x04 \x01(\x03R\x02idBCZAgithub.com/dream-horizon-org/odin/proto/gen/go/dream11/oam/dto/v1b\x06proto3"
 
 var (
 	file_dream11_oam_dto_v1_provider_account_proto_rawDescOnce sync.Once

@@ -7,7 +7,7 @@
 package v1
 
 import (
-	v1 "github.com/dream11/odin/proto/gen/go/dream11/od/dto/v1"
+	v1 "github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/dto/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -813,7 +813,7 @@ const file_dream11_od_service_v1_service_proto_rawDesc = "" +
 	"\rDeployService\x12+.dream11.od.service.v1.DeployServiceRequest\x1a,.dream11.od.service.v1.DeployServiceResponse\"\x000\x01\x12q\n" +
 	"\x0eOperateService\x12,.dream11.od.service.v1.OperateServiceRequest\x1a-.dream11.od.service.v1.OperateServiceResponse\"\x000\x01\x12t\n" +
 	"\x0fUndeployService\x12-.dream11.od.service.v1.UndeployServiceRequest\x1a..dream11.od.service.v1.UndeployServiceResponse\"\x000\x01\x12\x81\x01\n" +
-	"\x14OperateComponentDiff\x122.dream11.od.service.v1.OperateComponentDiffRequest\x1a3.dream11.od.service.v1.OperateComponentDiffResponse\"\x00B<Z:github.com/dream11/odin/proto/gen/go/dream11/od/service/v1b\x06proto3"
+	"\x14OperateComponentDiff\x122.dream11.od.service.v1.OperateComponentDiffRequest\x1a3.dream11.od.service.v1.OperateComponentDiffResponse\"\x00BFZDgithub.com/dream-horizon-org/odin/proto/gen/go/dream11/od/service/v1b\x06proto3"
 
 var (
 	file_dream11_od_service_v1_service_proto_rawDescOnce sync.Once

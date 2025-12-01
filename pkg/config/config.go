@@ -4,8 +4,8 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/dream11/odin/api/configuration"
-	"github.com/dream11/odin/app"
+	"github.com/dream-horizon-org/odin/api/configuration"
+	"github.com/dream-horizon-org/odin/app"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )

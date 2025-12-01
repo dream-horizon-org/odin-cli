@@ -7,7 +7,7 @@
 package v1
 
 import (
-	v1 "github.com/dream11/odin/proto/gen/go/dream11/od/dto/v1"
+	v1 "github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/dto/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -690,7 +690,7 @@ const file_dream11_od_environment_v1_environment_proto_rawDesc = "" +
 	"\x13DescribeEnvironment\x125.dream11.od.environment.v1.DescribeEnvironmentRequest\x1a6.dream11.od.environment.v1.DescribeEnvironmentResponse\"\x00\x12\x82\x01\n" +
 	"\x11CreateEnvironment\x123.dream11.od.environment.v1.CreateEnvironmentRequest\x1a4.dream11.od.environment.v1.CreateEnvironmentResponse\"\x000\x01\x12\x82\x01\n" +
 	"\x11DeleteEnvironment\x123.dream11.od.environment.v1.DeleteEnvironmentRequest\x1a4.dream11.od.environment.v1.DeleteEnvironmentResponse\"\x000\x01\x12\x82\x01\n" +
-	"\x11StatusEnvironment\x123.dream11.od.environment.v1.StatusEnvironmentRequest\x1a4.dream11.od.environment.v1.StatusEnvironmentResponse\"\x000\x01B@Z>github.com/dream11/odin/proto/gen/go/dream11/od/environment/v1b\x06proto3"
+	"\x11StatusEnvironment\x123.dream11.od.environment.v1.StatusEnvironmentRequest\x1a4.dream11.od.environment.v1.StatusEnvironmentResponse\"\x000\x01BJZHgithub.com/dream-horizon-org/odin/proto/gen/go/dream11/od/environment/v1b\x06proto3"
 
 var (
 	file_dream11_od_environment_v1_environment_proto_rawDescOnce sync.Once

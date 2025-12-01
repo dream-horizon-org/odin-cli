@@ -1,7 +1,7 @@
 package set
 
 import (
-	"github.com/dream11/odin/pkg/config"
+	"github.com/dream-horizon-org/odin/pkg/config"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )

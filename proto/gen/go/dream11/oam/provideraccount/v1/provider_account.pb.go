@@ -7,7 +7,7 @@
 package v1
 
 import (
-	v1 "github.com/dream11/odin/proto/gen/go/dream11/oam/dto/v1"
+	v1 "github.com/dream-horizon-org/odin/proto/gen/go/dream11/oam/dto/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -240,7 +240,7 @@ const file_dream11_oam_provideraccount_v1_provider_account_proto_rawDesc = "" +
 	"\baccounts\x18\x01 \x03(\v2:.dream11.oam.provideraccount.v1.GetProviderAccountResponseR\baccounts2\xbb\x02\n" +
 	"\x16ProviderAccountService\x12\x8d\x01\n" +
 	"\x12GetProviderAccount\x129.dream11.oam.provideraccount.v1.GetProviderAccountRequest\x1a:.dream11.oam.provideraccount.v1.GetProviderAccountResponse\"\x00\x12\x90\x01\n" +
-	"\x13GetProviderAccounts\x12:.dream11.oam.provideraccount.v1.GetProviderAccountsRequest\x1a;.dream11.oam.provideraccount.v1.GetProviderAccountsResponse\"\x00BEZCgithub.com/dream11/odin/proto/gen/go/dream11/oam/provideraccount/v1b\x06proto3"
+	"\x13GetProviderAccounts\x12:.dream11.oam.provideraccount.v1.GetProviderAccountsRequest\x1a;.dream11.oam.provideraccount.v1.GetProviderAccountsResponse\"\x00BOZMgithub.com/dream-horizon-org/odin/proto/gen/go/dream11/oam/provideraccount/v1b\x06proto3"
 
 var (
 	file_dream11_oam_provideraccount_v1_provider_account_proto_rawDescOnce sync.Once

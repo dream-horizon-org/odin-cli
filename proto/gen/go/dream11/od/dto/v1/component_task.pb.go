@@ -180,7 +180,7 @@ const file_dream11_od_dto_v1_component_task_proto_rawDesc = "" +
 	"\x05_typeB\t\n" +
 	"\a_statusB\x18\n" +
 	"\x16_service_deployment_idB\t\n" +
-	"\a_configB8Z6github.com/dream11/odin/proto/gen/go/dream11/od/dto/v1b\x06proto3"
+	"\a_configBBZ@github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/dto/v1b\x06proto3"
 
 var (
 	file_dream11_od_dto_v1_component_task_proto_rawDescOnce sync.Once

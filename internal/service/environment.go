@@ -7,8 +7,8 @@ import (
 	"io"
 
 	"github.com/briandowns/spinner"
-	"github.com/dream11/odin/pkg/constant"
-	environment "github.com/dream11/odin/proto/gen/go/dream11/od/environment/v1"
+	"github.com/dream-horizon-org/odin/pkg/constant"
+	environment "github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/environment/v1"
 	log "github.com/sirupsen/logrus"
 )
 

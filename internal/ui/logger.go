@@ -3,7 +3,7 @@ package ui
 import (
 	"os"
 
-	"github.com/dream11/odin/pkg/constant"
+	"github.com/dream-horizon-org/odin/pkg/constant"
 	log "github.com/sirupsen/logrus"
 )
 

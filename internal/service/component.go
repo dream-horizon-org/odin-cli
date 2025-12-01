@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/avast/retry-go"
-	"github.com/dream11/odin/pkg/constant"
-	"github.com/dream11/odin/pkg/util"
-	serviceProto "github.com/dream11/odin/proto/gen/go/dream11/od/service/v1"
+	"github.com/dream-horizon-org/odin/pkg/constant"
+	"github.com/dream-horizon-org/odin/pkg/util"
+	serviceProto "github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/service/v1"
 	log "github.com/sirupsen/logrus"
 )
 

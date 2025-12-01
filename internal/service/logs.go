@@ -7,9 +7,9 @@ import (
 	"io"
 	"time"
 
-	"github.com/dream11/odin/pkg/constant"
-	"github.com/dream11/odin/pkg/util"
-	logs "github.com/dream11/odin/proto/gen/go/dream11/od/logs/v1"
+	"github.com/dream-horizon-org/odin/pkg/constant"
+	"github.com/dream-horizon-org/odin/pkg/util"
+	logs "github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/logs/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

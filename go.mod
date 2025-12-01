@@ -1,4 +1,4 @@
-module github.com/dream11/odin
+module github.com/dream-horizon-org/odin
 
 go 1.22.0
 

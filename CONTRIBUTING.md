@@ -74,7 +74,7 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 ## Community
 
-* Participate in [GitHub Discussions](https://github.com/ds-horizon/odin-cli/discussions)
+* Participate in [GitHub Discussions](https://github.com/dream-horizon-org/odin-cli/discussions)
 
 ## Questions?
 
