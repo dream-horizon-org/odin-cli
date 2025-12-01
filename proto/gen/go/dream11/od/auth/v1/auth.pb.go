@@ -234,7 +234,7 @@ const file_dream11_od_auth_v1_auth_proto_rawDesc = "" +
 	"\x04data\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x04data2\xe0\x01\n" +
 	"\vAuthService\x12c\n" +
 	"\fGetUserToken\x12'.dream11.od.auth.v1.GetUserTokenRequest\x1a(.dream11.od.auth.v1.GetUserTokenResponse\"\x00\x12l\n" +
-	"\x0fGetAuthProvider\x12*.dream11.od.auth.v1.GetAuthProviderRequest\x1a+.dream11.od.auth.v1.GetAuthProviderResponse\"\x00B9Z7github.com/dream11/odin/proto/gen/go/dream11/od/auth/v1b\x06proto3"
+	"\x0fGetAuthProvider\x12*.dream11.od.auth.v1.GetAuthProviderRequest\x1a+.dream11.od.auth.v1.GetAuthProviderResponse\"\x00BCZAgithub.com/dream-horizon-org/odin/proto/gen/go/dream11/od/auth/v1b\x06proto3"
 
 var (
 	file_dream11_od_auth_v1_auth_proto_rawDescOnce sync.Once

@@ -674,7 +674,7 @@ const file_dream11_od_dto_v1_service_proto_rawDesc = "" +
 	"\x10existing_version\x18\x02 \x01(\tR\x0fexistingVersion\x12\x1f\n" +
 	"\vnew_version\x18\x03 \x01(\tR\n" +
 	"newVersion\x12)\n" +
-	"\x10version_conflict\x18\x04 \x01(\bR\x0fversionConflictB8Z6github.com/dream11/odin/proto/gen/go/dream11/od/dto/v1b\x06proto3"
+	"\x10version_conflict\x18\x04 \x01(\bR\x0fversionConflictBBZ@github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/dto/v1b\x06proto3"
 
 var (
 	file_dream11_od_dto_v1_service_proto_rawDescOnce sync.Once

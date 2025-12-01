@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/dream11/odin/pkg/constant"
-	auth "github.com/dream11/odin/proto/gen/go/dream11/od/auth/v1"
+	"github.com/dream-horizon-org/odin/pkg/constant"
+	auth "github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/auth/v1"
 	log "github.com/sirupsen/logrus"
 )
 

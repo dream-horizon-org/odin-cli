@@ -3,7 +3,7 @@ package dream11.oam.dto.v1;
 
 import "google/protobuf/struct.proto";
 
-option go_package = "github.com/dream11/odin/proto/gen/go/dream11/oam/dto/v1";
+option go_package = "github.com/dream-horizon-org/odin/proto/gen/go/dream11/oam/dto/v1";
 
 message ProviderAccount {
   string name = 1;

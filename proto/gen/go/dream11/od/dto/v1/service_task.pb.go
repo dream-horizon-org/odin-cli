@@ -169,7 +169,7 @@ const file_dream11_od_dto_v1_service_task_proto_rawDesc = "" +
 	"\n" +
 	"\b_versionB\t\n" +
 	"\a_statusB\t\n" +
-	"\a_env_idB8Z6github.com/dream11/odin/proto/gen/go/dream11/od/dto/v1b\x06proto3"
+	"\a_env_idBBZ@github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/dto/v1b\x06proto3"
 
 var (
 	file_dream11_od_dto_v1_service_task_proto_rawDescOnce sync.Once

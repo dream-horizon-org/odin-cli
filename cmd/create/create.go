@@ -1,7 +1,7 @@
 package create
 
 import (
-	"github.com/dream11/odin/cmd"
+	"github.com/dream-horizon-org/odin/cmd"
 	"github.com/spf13/cobra"
 )
 

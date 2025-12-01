@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dream11/odin/internal/ui"
-	v1 "github.com/dream11/odin/proto/gen/go/dream11/od/service/v1"
+	"github.com/dream-horizon-org/odin/internal/ui"
+	v1 "github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/service/v1"
 	"github.com/google/uuid"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"

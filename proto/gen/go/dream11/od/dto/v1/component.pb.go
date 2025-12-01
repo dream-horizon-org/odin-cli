@@ -291,7 +291,7 @@ const file_dream11_od_dto_v1_component_proto_rawDesc = "" +
 	"\bdefaults\x18\x03 \x01(\v2\x17.google.protobuf.StructH\x02R\bdefaults\x88\x01\x01B\a\n" +
 	"\x05_nameB\t\n" +
 	"\a_schemaB\v\n" +
-	"\t_defaultsB8Z6github.com/dream11/odin/proto/gen/go/dream11/od/dto/v1b\x06proto3"
+	"\t_defaultsBBZ@github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/dto/v1b\x06proto3"
 
 var (
 	file_dream11_od_dto_v1_component_proto_rawDescOnce sync.Once

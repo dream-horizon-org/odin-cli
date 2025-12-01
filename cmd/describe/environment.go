@@ -6,11 +6,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/dream11/odin/internal/service"
-	"github.com/dream11/odin/pkg/constant"
-	"github.com/dream11/odin/pkg/util"
-	v1 "github.com/dream11/odin/proto/gen/go/dream11/od/dto/v1"
-	environment "github.com/dream11/odin/proto/gen/go/dream11/od/environment/v1"
+	"github.com/dream-horizon-org/odin/internal/service"
+	"github.com/dream-horizon-org/odin/pkg/constant"
+	"github.com/dream-horizon-org/odin/pkg/util"
+	v1 "github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/dto/v1"
+	environment "github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/environment/v1"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )

@@ -7,7 +7,7 @@
 package v1
 
 import (
-	v1 "github.com/dream11/odin/proto/gen/go/dream11/oam/provideraccount/v1"
+	v1 "github.com/dream-horizon-org/odin/proto/gen/go/dream11/oam/provideraccount/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -327,7 +327,7 @@ const file_dream11_od_dto_v1_environment_proto_rawDesc = "" +
 	"\x05state\x18\x03 \x01(\tR\x05state\x12\"\n" +
 	"\n" +
 	"created_by\x18\x05 \x01(\tH\x00R\tcreatedBy\x88\x01\x01B\r\n" +
-	"\v_created_byB8Z6github.com/dream11/odin/proto/gen/go/dream11/od/dto/v1b\x06proto3"
+	"\v_created_byBBZ@github.com/dream-horizon-org/odin/proto/gen/go/dream11/od/dto/v1b\x06proto3"
 
 var (
 	file_dream11_od_dto_v1_environment_proto_rawDescOnce sync.Once
